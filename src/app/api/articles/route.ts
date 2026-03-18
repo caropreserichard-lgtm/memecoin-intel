@@ -14,13 +14,21 @@ export async function GET(request: NextRequest) {
   const starred = searchParams.get('starred');
   const showRejected = searchParams.get('showRejected');
   const date = searchParams.get('date');
+  const sortBy = searchParams.get('sortBy');
 
   let query = supabase
     .from('articles')
-    .select('*, sources(name)')
-    .order('memecoin_score', { ascending: false })
-    .order('created_at', { ascending: false })
-    .limit(200);
+    .select('*, sources(name)');
+
+  if (sortBy === 'newest') {
+    query = query.order('created_at', { ascending: false });
+  } else {
+    query = query
+      .order('memecoin_score', { ascending: false })
+      .order('created_at', { ascending: false });
+  }
+
+  query = query.limit(200);
 
   if (category && category !== 'all') {
     query = query.eq('category', category);

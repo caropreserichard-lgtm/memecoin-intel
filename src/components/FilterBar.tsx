@@ -8,6 +8,7 @@ interface Filters {
   starred: boolean;
   showRejected: boolean;
   date: string;
+  sortBy: string;
 }
 
 interface FilterBarProps {
@@ -22,6 +23,16 @@ export function FilterBar({ filters, onChange }: FilterBarProps) {
 
   return (
     <div className="bg-gray-900/80 border border-gray-800 rounded-xl p-4 flex flex-wrap items-center gap-3">
+      {/* Sort By */}
+      <select
+        value={filters.sortBy}
+        onChange={(e) => set('sortBy', e.target.value)}
+        className="bg-gray-800 text-gray-300 text-sm rounded-lg px-3 py-1.5 border border-gray-700 focus:border-emerald-600 focus:outline-none"
+      >
+        <option value="score">Sort: Score</option>
+        <option value="newest">Sort: Newest</option>
+      </select>
+
       {/* Category */}
       <select
         value={filters.category}
@@ -29,8 +40,12 @@ export function FilterBar({ filters, onChange }: FilterBarProps) {
         className="bg-gray-800 text-gray-300 text-sm rounded-lg px-3 py-1.5 border border-gray-700 focus:border-emerald-600 focus:outline-none"
       >
         <option value="all">All Categories</option>
-        <option value="animals">Animals</option>
+        <option value="viral">Viral</option>
+        <option value="heroic">Heroic</option>
+        <option value="crime">Crime</option>
         <option value="weird">Weird</option>
+        <option value="animals">Animals</option>
+        <option value="politics">Politics</option>
         <option value="science">Science</option>
         <option value="tech">Tech</option>
         <option value="environment">Environment</option>

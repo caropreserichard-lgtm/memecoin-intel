@@ -15,6 +15,7 @@ interface Filters {
   starred: boolean;
   showRejected: boolean;
   date: string;
+  sortBy: string;
 }
 
 export default function DashboardPage() {
@@ -27,11 +28,12 @@ export default function DashboardPage() {
   const [filters, setFilters] = useState<Filters>({
     category: 'all',
     verdict: 'all',
-    minScore: 70,
+    minScore: 75,
     maxScore: 100,
     starred: false,
     showRejected: false,
     date: '',
+    sortBy: 'score',
   });
 
   const fetchArticles = useCallback(async () => {
@@ -43,6 +45,7 @@ export default function DashboardPage() {
     if (filters.starred) params.set('starred', 'true');
     if (filters.showRejected) params.set('showRejected', 'true');
     if (filters.date) params.set('date', filters.date);
+    if (filters.sortBy !== 'score') params.set('sortBy', filters.sortBy);
 
     const res = await fetch(`/api/articles?${params}`);
     const data = await res.json();

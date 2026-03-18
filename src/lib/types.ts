@@ -58,6 +58,7 @@ export interface ClaudeAnalysis {
   shillability_score: number;
   simplicity_score: number;
   controversy_score: number;
+  category?: string;
   concise_summary: string;
   why_interesting: string;
   key_entities: string[];

@@ -10,9 +10,16 @@ export const supabase = createClient(
 );
 
 // Server-side Supabase client (uses service key for full access)
+// Disable Next.js fetch caching so DB queries are always fresh
 export function createServiceClient() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || PLACEHOLDER_URL,
-    process.env.SUPABASE_SERVICE_KEY || PLACEHOLDER_KEY
+    process.env.SUPABASE_SERVICE_KEY || PLACEHOLDER_KEY,
+    {
+      global: {
+        fetch: (url: string | URL | Request, options?: RequestInit) =>
+          fetch(url, { ...options, cache: 'no-store' }),
+      },
+    }
   );
 }
