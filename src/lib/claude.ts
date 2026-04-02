@@ -27,7 +27,7 @@ export async function analyzeArticle(
     messages: [
       {
         role: 'user',
-        content: `You are a memecoin narrative analyst for crypto twitter degens. Score this article ONLY on whether it could spawn a viral memecoin that people would actually buy. Be EXTREMELY strict — most articles should score below 40.
+        content: `You are an elite memecoin narrative scout for crypto twitter. Your job is to filter noise and find ONLY events with real token potential.
 
 ARTICLE: ${title}
 SOURCE: ${source}
@@ -35,40 +35,51 @@ BODY: ${truncatedBody}
 
 Return ONLY raw JSON. No markdown, no backticks.
 
-{"memecoin_score":0-100,"virality_score":0-100,"visual_score":0-100,"lore_score":0-100,"shillability_score":0-100,"simplicity_score":0-100,"controversy_score":0-100,"category":"animals|weird|science|viral|crime|heroic|politics|tech|internet-culture","concise_summary":"one sentence","why_interesting":"why memecoin potential","key_entities":["entities"],"emotional_profile":["emotions"],"mascot_potential":"description or null","suggested_tickers":["$TICKER"],"suggested_names":["coin names"],"suggested_pitch":"max 10 words","ct_shill_angle":"crypto twitter angle","strengths":["strengths"],"weaknesses":["weaknesses"],"verdict":"ignore|weak candidate|watchlist|strong candidate|top memecoin candidate"}
+{"memecoin_score":0-100,"virality_score":0-100,"visual_score":0-100,"lore_score":0-100,"shillability_score":0-100,"simplicity_score":0-100,"controversy_score":0-100,"category":"animals|weird|science|viral|heroic|tech|internet-culture|event","concise_summary":"one sentence","why_interesting":"why memecoin potential","key_entities":["entities"],"emotional_profile":["emotions"],"mascot_potential":"description or null","suggested_tickers":["$TICKER"],"suggested_names":["coin names"],"suggested_pitch":"max 10 words","ct_shill_angle":"crypto twitter angle","strengths":["strengths"],"weaknesses":["weaknesses"],"verdict":"ignore|weak candidate|watchlist|strong candidate|top memecoin candidate"}
 
-WHAT SCORES 85+  (TOP MEMECOIN — only 2-5% of articles):
-- VIRAL INTERNET SENSATION — a person, animal, or character the ENTIRE internet is obsessing over right now (e.g. a celebrity's pet with a funny name going viral, a streamer's girlfriend everyone is memeing)
-- ABSURD HEADLINE that reads like a meme itself (e.g. "rectal garlic for immune support", "man parks in all 211 spots")
-- NEW AI AGENT going mega-viral with a catchy name people are memeing
+=== THE MEME-COIN CHECKLIST (article must hit 2+ to score 70+) ===
 
-WHAT SCORES 70-84 (STRONG — about 10% of articles):
-- Specific ANIMAL doing something crazy/cute that went viral (escape, attack, rare sighting)
-- BIZARRE discovery with meme potential (new dinosaur species, deep sea creature with funny look)
-- Internet celebrity or trending person everyone is talking about
-- Drug/treatment breakthrough with a catchy or absurd angle people would meme
-- Viral moment with a CLEAR mascot or character people can rally behind
+1. VISUAL ICONOGRAPHY: Is there a powerful image/video? (baby monkey hugging a toy, corgi leading a pack, neon blue pigs). If you can picture a PFP or meme from it, +20 points.
 
-WHAT SCORES 40-69 (WEAK — filler, not worth tracking):
-- Mildly interesting science that nobody will actually meme
-- Sad/tragic stories (heart attacks, deaths, accidents) — these are NOT memecoin material even if someone acted heroically
-- Generic weird news that isn't actually viral
-- Celebrity news that isn't a specific viral moment
+2. EMOTIONAL NARRATIVE: Does it trigger JOY, WONDER, or ABSURDITY? (capybara escaping zoo = drama + cute, bear freed from cage = justice, AI chatbot recommending rectal garlic = pure absurdity). Sad/tragic stories do NOT count.
 
-WHAT SCORES BELOW 40 (IGNORE — most articles):
-- Generic politics, economy, war, policy
+3. TICKER POTENTIAL: Is the name short, catchy, instantly memeable? (e.g. $SAMBA the capybara, $MOMO the girlfriend, $GARLIC, $CORGI). If the ticker writes itself, +20 points.
+
+4. EVENT TIMING: Is this tied to a MAJOR scheduled event the world is watching? (Artemis launch, SpaceX landing, major tech release, World Cup moment). Anticipation = buying pressure.
+
+=== SCORING GUIDE ===
+
+90-100 (TOP MEMECOIN — 1-2% of articles):
+- Hits ALL 4 checklist items. The entire internet is already talking about it.
+- Example: "Samba the capybara escapes zoo, city-wide manhunt goes viral" — visual (cute capybara), emotional (freedom drama), ticker ($SAMBA), timing (trending NOW).
+
+75-89 (STRONG CANDIDATE — 5-10% of articles):
+- Hits 3 of 4 checklist items. Clear memecoin potential.
+- Examples: Baby titi monkey gets cuddly surrogate mom ($TITI), Corgi leads 7 lost dogs home ($CORGI), Chinese AI agent OpenClaw goes viral ($CLAW), bizarre discovery with funny name.
+
+60-74 (WATCHLIST — maybe 10-15%):
+- Hits 2 of 4 checklist items. Interesting but needs more viral momentum.
+- Examples: Rare animal sighting with okay ticker, weird science headline, trending person without clear mascot.
+
+BELOW 60 (IGNORE — 70-80% of articles):
+- Hits 0-1 checklist items. Not memecoin material.
+
+=== INSTANT SCORE BELOW 30 (hard filter) ===
+- Politics, war, economy, policy updates
 - Sports scores, transfers, match reports
-- Product reviews, buying guides, lifestyle tips
-- Local crime, accidents, health warnings
-- Corporate news, earnings, mergers
-- Any sad/depressing story — memecoins need JOY and ABSURDITY, not tragedy
+- Product reviews, buying guides, deals, lifestyle tips
+- Sad/tragic stories: deaths, heart attacks, accidents, disease warnings
+- Corporate earnings, mergers, layoffs
+- Generic science papers nobody will meme
+- Any article that makes you feel SAD instead of EXCITED
 
-CRITICAL RULES:
-- SAD STORIES ALWAYS SCORE BELOW 40. A dad having a heart attack is NOT memecoin material. A kid saving someone is touching but NOT a memecoin.
-- The article must make you LAUGH, feel AMAZED, or think "I need to buy that coin NOW"
-- If you wouldn't tweet about it with a rocket emoji, score it below 50
-- Internet trends, viral characters, and absurd moments > sad heroics
-- Only 10-15% of ALL articles should score 70+`,
+=== CRITICAL RULES ===
+- SAD = LOW SCORE. Always. Heart attacks, cancer deaths, accidents = below 30. Period.
+- The TICKER TEST: If you can't imagine a $TICKER from this article, score below 50.
+- The TWEET TEST: If you wouldn't quote-tweet this with rocket emojis, score below 50.
+- The PFP TEST: If there's no character/animal/mascot for a profile picture, subtract 20.
+- INTERNET CULTURE > traditional news. Trending memes, viral moments, absurd headlines win.
+- When in doubt, score LOW. False positives waste more time than false negatives.`,
       },
     ],
   });

@@ -6,6 +6,7 @@ import { ArticleCard } from '@/components/ArticleCard';
 import { ArticleModal } from '@/components/ArticleModal';
 import { FilterBar } from '@/components/FilterBar';
 import { StatsBar } from '@/components/StatsBar';
+import UpcomingEvents from '@/components/UpcomingEvents';
 
 interface Filters {
   category: string;
@@ -101,6 +102,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-4">
       <StatsBar stats={stats} lastScan={lastScan} scanning={scanning} onTriggerScan={handleTriggerScan} />
+      <UpcomingEvents />
       <FilterBar filters={filters} onChange={setFilters} />
 
       {loading ? (
