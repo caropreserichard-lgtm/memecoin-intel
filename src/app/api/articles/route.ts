@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (showRejected !== 'true') {
-    query = query.is('is_rejected', false);
+    query = query.or('is_rejected.is.null,is_rejected.eq.false');
   }
 
   if (date) {
