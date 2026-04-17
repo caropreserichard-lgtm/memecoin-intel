@@ -43,8 +43,8 @@ const NEW_SOURCES = [
   { name: 'Smithsonian Magazine', url: 'https://www.smithsonianmag.com', rss_url: 'https://www.smithsonianmag.com/rss/latest_articles/', category: 'science', trust_level: 5 },
 
   // --- Crime / Heroic ---
-  { name: 'Crime Online', url: 'https://www.crimeonline.com', rss_url: 'https://www.crimeonline.com/feed/', category: 'crime', trust_level: 3 },
-  { name: 'People', url: 'https://people.com', rss_url: 'https://people.com/feed/', category: 'viral', trust_level: 4 },
+  { name: 'Crime Online', url: 'https://www.crimeonline.com', rss_url: 'https://www.crimeonline.com/feed/', category: 'weird', trust_level: 3 },
+  { name: 'People', url: 'https://people.com', rss_url: 'https://people.com/feed/', category: 'weird', trust_level: 4 },
 ];
 
 export async function GET() {
