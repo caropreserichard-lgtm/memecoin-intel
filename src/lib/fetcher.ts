@@ -17,7 +17,7 @@ export async function fetchFromRSS(source: Source): Promise<FetchedArticle[]> {
   const feed = await rssParser.parseURL(source.rss_url);
   const articles: FetchedArticle[] = [];
 
-  for (const item of feed.items.slice(0, 15)) {
+  for (const item of feed.items.slice(0, 25)) {
     if (!item.link || !item.title) continue;
 
     let bodyText = '';

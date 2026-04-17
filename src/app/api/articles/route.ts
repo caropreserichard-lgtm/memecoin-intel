@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
   const starred = searchParams.get('starred');
   const showRejected = searchParams.get('showRejected');
   const date = searchParams.get('date');
+  const days = searchParams.get('days');
   const sortBy = searchParams.get('sortBy');
 
   let query = supabase
@@ -28,7 +29,7 @@ export async function GET(request: NextRequest) {
       .order('created_at', { ascending: false });
   }
 
-  query = query.limit(200);
+  query = query.limit(300);
 
   if (category && category !== 'all') {
     query = query.eq('category', category);
@@ -60,8 +61,13 @@ export async function GET(request: NextRequest) {
     query = query.or('is_rejected.is.null,is_rejected.eq.false');
   }
 
+  // Date range: specific day takes priority, then rolling window in days
   if (date) {
     query = query.gte('created_at', `${date}T00:00:00`).lte('created_at', `${date}T23:59:59`);
+  } else if (days) {
+    const daysInt = parseInt(days);
+    const since = new Date(Date.now() - daysInt * 24 * 60 * 60 * 1000).toISOString();
+    query = query.gte('created_at', since);
   }
 
   const { data, error } = await query;

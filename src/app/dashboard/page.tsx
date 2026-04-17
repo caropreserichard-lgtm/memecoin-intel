@@ -16,6 +16,7 @@ interface Filters {
   starred: boolean;
   showRejected: boolean;
   date: string;
+  days: string;
   sortBy: string;
 }
 
@@ -29,11 +30,12 @@ export default function DashboardPage() {
   const [filters, setFilters] = useState<Filters>({
     category: 'all',
     verdict: 'all',
-    minScore: 75,
+    minScore: 48,
     maxScore: 100,
     starred: false,
     showRejected: false,
     date: '',
+    days: '7',
     sortBy: 'score',
   });
 
@@ -46,6 +48,7 @@ export default function DashboardPage() {
     if (filters.starred) params.set('starred', 'true');
     if (filters.showRejected) params.set('showRejected', 'true');
     if (filters.date) params.set('date', filters.date);
+    else if (filters.days) params.set('days', filters.days);
     if (filters.sortBy !== 'score') params.set('sortBy', filters.sortBy);
 
     const res = await fetch(`/api/articles?${params}`);

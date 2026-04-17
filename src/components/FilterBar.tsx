@@ -8,6 +8,7 @@ interface Filters {
   starred: boolean;
   showRejected: boolean;
   date: string;
+  days: string;
   sortBy: string;
 }
 
@@ -20,6 +21,21 @@ export function FilterBar({ filters, onChange }: FilterBarProps) {
   const set = (key: keyof Filters, value: string | number | boolean) => {
     onChange({ ...filters, [key]: value });
   };
+
+  const handleRangeChange = (value: string) => {
+    if (value === 'custom') return; // let user pick date manually
+    if (value === 'date') return;
+    // Clear specific date when picking a rolling window
+    onChange({ ...filters, days: value, date: '' });
+  };
+
+  const handleDateChange = (value: string) => {
+    // Picking a specific date clears the rolling window
+    onChange({ ...filters, date: value, days: '' });
+  };
+
+  // Determine what the range selector shows
+  const rangeValue = filters.date ? 'custom' : (filters.days || '7');
 
   return (
     <div className="bg-gray-900/80 border border-gray-800 rounded-xl p-4 flex flex-wrap items-center gap-3">
@@ -87,13 +103,30 @@ export function FilterBar({ filters, onChange }: FilterBarProps) {
         />
       </div>
 
-      {/* Date */}
-      <input
-        type="date"
-        value={filters.date}
-        onChange={(e) => set('date', e.target.value)}
+      {/* Date Range Selector */}
+      <select
+        value={rangeValue}
+        onChange={(e) => handleRangeChange(e.target.value)}
         className="bg-gray-800 text-gray-300 text-sm rounded-lg px-3 py-1.5 border border-gray-700 focus:border-emerald-600 focus:outline-none"
-      />
+      >
+        <option value="1">Today</option>
+        <option value="3">Last 3 days</option>
+        <option value="7">Last 7 days</option>
+        <option value="14">Last 14 days</option>
+        <option value="30">Last 30 days</option>
+        <option value="">All time</option>
+        <option value="custom">Custom date...</option>
+      </select>
+
+      {/* Custom Date Picker — only shown when "custom date" is selected */}
+      {rangeValue === 'custom' && (
+        <input
+          type="date"
+          value={filters.date}
+          onChange={(e) => handleDateChange(e.target.value)}
+          className="bg-gray-800 text-gray-300 text-sm rounded-lg px-3 py-1.5 border border-gray-700 focus:border-emerald-600 focus:outline-none"
+        />
+      )}
 
       {/* Starred Toggle */}
       <label className="flex items-center gap-1.5 cursor-pointer">
